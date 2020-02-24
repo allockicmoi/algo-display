@@ -6,7 +6,7 @@ export default class Display extends Component {
   render() {
     return (
       <div className="container">
-        <h1>TESTING</h1>
+        <h1>ALGO DISPLAY</h1>
 
         <Grid />
       </div>

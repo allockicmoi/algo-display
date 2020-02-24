@@ -4,19 +4,22 @@ export function BFS(grid, start, end) {
 
   const toVisit = [];
   const vstd = [];
+  const shortestPath = [];
   let i = 0;
   let currentNode = start;
   while (currentNode !== end) {
     let neighbs = GetUnvisitedNeighbours(currentNode, grid);
-    console.log(neighbs);
+    // console.log(neighbs);
 
     for (let child in neighbs) {
       // console.log(neighbs[child]);
+
       if (!toVisit.includes(neighbs[child])) {
+        neighbs[child].parent = currentNode;
         toVisit.push(neighbs[child]);
       }
     }
-    console.log(toVisit);
+    //console.log(toVisit);
     currentNode.visited = true;
     grid[currentNode.row][currentNode.col].visited = true;
     vstd.push(currentNode);
@@ -26,10 +29,26 @@ export function BFS(grid, start, end) {
       break;
     }
   }
-  // console.log(vstd);
-  return vstd;
-}
 
+  BacktrackShortest(shortestPath, end, start);
+
+  console.log(shortestPath);
+  return { vstd, shortestPath };
+}
+function BacktrackShortest(path, end, start) {
+  let current = end;
+  let i = 0;
+  while (current !== start && i < 500) {
+    console.log(current);
+
+    path.push(current);
+    current = current.parent;
+    i++;
+  }
+  path.push(start);
+  path = path.reverse();
+  return path;
+}
 function GetUnvisitedNeighbours(node, grid) {
   const neighbours = [];
   // console.log(node);
@@ -42,7 +61,7 @@ function GetUnvisitedNeighbours(node, grid) {
     ) {
       neighbours.push(grid[row - 1][col]);
     }
-    console.log(grid[row - 1][col].visited === false);
+    //console.log(grid[row - 1][col].visited === false);
   }
 
   if (row !== 19) {

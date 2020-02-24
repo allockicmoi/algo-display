@@ -16,7 +16,7 @@ export default class CenterGrid extends Component {
     this.setState({ grid, start, end });
   }
   toggleWall(row, col) {
-    console.log(this.state);
+    //console.log(this.state);
     const tempGrid = this.state.grid.slice();
 
     tempGrid[row][col].isWall =
@@ -24,11 +24,21 @@ export default class CenterGrid extends Component {
     this.setState({ grid: tempGrid });
   }
 
-  animateSearchAlgo(orderedSquares) {
+  animateSearchAlgo(BFS) {
+    const orderedSquares = BFS.vstd;
+    const shortestPath = BFS.shortestPath;
     console.log(orderedSquares);
-
+    console.log(shortestPath);
     for (const index in orderedSquares) {
       setTimeout(() => {
+        for (const pathIndex in shortestPath) {
+          setTimeout(() => {
+            const square = shortestPath[pathIndex];
+            document.getElementById(
+              `square-${square.row}-${square.col}`
+            ).className = "square shortest";
+          }, 3 * orderedSquares.length + 25 * pathIndex);
+        }
         const square = orderedSquares[index];
         if (
           document.getElementById(`square-${square.row}-${square.col}`)
