@@ -7,3 +7,12 @@
   border-width: 1px;
   margin-bottom: -2px;
 }
+.start {
+  background-color: chartreuse;
+}
+.end {
+  background-color: red;
+}
+.visited {
+  background-color: blue;
+}
