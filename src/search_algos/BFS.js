@@ -36,25 +36,37 @@ function GetUnvisitedNeighbours(node, grid) {
   const row = node.row;
   const col = node.col;
   if (row !== 0) {
-    if (grid[row - 1][col].visited === false) {
+    if (
+      grid[row - 1][col].visited === false &&
+      grid[row - 1][col].isWall === false
+    ) {
       neighbours.push(grid[row - 1][col]);
     }
     console.log(grid[row - 1][col].visited === false);
   }
 
   if (row !== 19) {
-    if (grid[row + 1][col].visited === false) {
+    if (
+      grid[row + 1][col].visited === false &&
+      grid[row + 1][col].isWall === false
+    ) {
       //console.log("adding neighbours");
       neighbours.push(grid[row + 1][col]);
     }
   }
   if (col !== 0) {
-    if (grid[row][col - 1].visited === false) {
+    if (
+      grid[row][col - 1].visited === false &&
+      grid[row][col - 1].isWall === false
+    ) {
       neighbours.push(grid[row][col - 1]);
     }
   }
   if (col !== 39) {
-    if (grid[row][col + 1].visited === false) {
+    if (
+      grid[row][col + 1].visited === false &&
+      grid[row][col + 1].isWall === false
+    ) {
       neighbours.push(grid[row][col + 1]);
     }
   }

@@ -8,12 +8,20 @@ export default class CenterGrid extends Component {
     this.state = {
       grid: []
     };
+    this.toggleWall = this.toggleWall.bind(this);
   }
-
   componentDidMount() {
     const { grid, start, end } = InitializeGrid();
     // console.log(grid);
     this.setState({ grid, start, end });
+  }
+  toggleWall(row, col) {
+    console.log(this.state);
+    const tempGrid = this.state.grid.slice();
+
+    tempGrid[row][col].isWall =
+      tempGrid[row][col].isWall === true ? false : true;
+    this.setState({ grid: tempGrid });
   }
 
   animateSearchAlgo(orderedSquares) {
@@ -61,6 +69,8 @@ export default class CenterGrid extends Component {
                     col={cIndex}
                     isStart={square.isStart}
                     isEnd={square.isEnd}
+                    isWall={false}
+                    toggleWall={this.toggleWall}
                   />
                 );
               })}
@@ -86,7 +96,8 @@ const InitializeGrid = () => {
         col,
         isStart,
         isEnd,
-        visited: false
+        visited: false,
+        isWall: false
       };
 
       if (square.isStart) {

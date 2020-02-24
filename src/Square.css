@@ -16,3 +16,6 @@
 .visited {
   background-color: blue;
 }
+.wall {
+  background-color: purple;
+}
