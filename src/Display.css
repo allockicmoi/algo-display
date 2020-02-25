@@ -2,3 +2,18 @@
   height: 100%;
   width: 100%;
 }
+.topbar {
+  background-color: rgb(118, 205, 255);
+  margin-top: -3em;
+  height: 9em;
+  overflow: hidden;
+}
+.ad {
+  outline-color: darkblue;
+  color: white;
+  font-size: 70px;
+
+  border-color: darkblue;
+  -webkit-text-stroke: 3px rgb(43, 90, 243);
+  -webkit-text-fill-color: white;
+}
