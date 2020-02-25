@@ -8,12 +8,22 @@ export default class CenterGrid extends Component {
   }
 
   toggleWall() {
+    if(this.props.mouseDown && this.props.extraClass !=='start' && this.props.extraClass !=='end'){
     this.props.toggleWall(this.props.row, this.props.col);
     if (this.state.isWall) {
       this.setState({ isWall: false });
     } else {
       this.setState({ isWall: true });
-    }
+    }}
+  }
+  toggleWallOnce() {
+    if(this.props.extraClass !=='start' && this.props.extraClass !=='end'){
+    this.props.toggleWall(this.props.row, this.props.col);
+    if (this.state.isWall) {
+      this.setState({ isWall: false });
+    } else {
+      this.setState({ isWall: true });
+    }}
   }
   render() {
     const { row, col, isStart, isEnd } = this.props;
@@ -29,7 +39,8 @@ export default class CenterGrid extends Component {
       <div
         id={`square-${row}-${col}`}
         className={`square  ${extraClass}`}
-        onClick={() => this.toggleWall()}
+        onMouseEnter={() => this.toggleWall()}
+        onMouseDownCapture={() => this.toggleWallOnce()}
       ></div>
     );
   }

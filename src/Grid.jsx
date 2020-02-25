@@ -12,7 +12,8 @@ export default class CenterGrid extends Component {
       grid: [],
       algo: () => BFS(this.state.grid, this.state.start, this.state.end),
       algoName: "BFS",
-      isFresh: true
+      isFresh: true,
+      mouseDown:false
     };
     this.toggleWall = this.toggleWall.bind(this);
     this.updateAlgo = this.updateAlgo.bind(this);
@@ -132,7 +133,13 @@ export default class CenterGrid extends Component {
     }
     console.log(grid);
   }
-
+  mouseDown(){
+    this.setState({mouseDown:true}, ()=>console.log(this.state.mouseDown));
+   
+  }
+  mouseUp(){
+    this.setState({mouseDown:false},()=>console.log(this.state.mouseDown));
+  }
   refreshAndAnimate() {
     if (this.state.isFresh === false) {
       this.clear();
@@ -143,7 +150,7 @@ export default class CenterGrid extends Component {
   render() {
     const { grid } = this.state;
     return (
-      <div className="grid">
+      <div className="grid" onMouseDown={()=>this.mouseDown()} onMouseUp={()=>this.mouseUp()} >
         <Selectionbar
           algo={() => this.refreshAndAnimate()}
           algoName={this.state.algoName}
@@ -165,6 +172,7 @@ export default class CenterGrid extends Component {
                     isEnd={square.isEnd}
                     isWall={false}
                     toggleWall={this.toggleWall}
+                    mouseDown={this.state.mouseDown}
                   />
                 );
               })}
