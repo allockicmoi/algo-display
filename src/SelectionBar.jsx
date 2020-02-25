@@ -10,7 +10,7 @@ export default class SelectionBar extends Component {
   }
 
   render() {
-    const algos = ["BFS", "DFS"];
+    const algos = ["BFS", "DFS", "A*"];
     return (
       <div className="selectionBar">
         <Dropdown
@@ -20,11 +20,13 @@ export default class SelectionBar extends Component {
           onChange={this.props.updateAlgo}
           value={this.props.algoName}
         ></Dropdown>
-        <div>
-          <button className="run_button" onClick={() => this.props.algo()}>
-            RUN
-          </button>
-        </div>
+
+        <button className="run_button" onClick={() => this.props.algo()}>
+          RUN
+        </button>
+        <button className="clear_button" onClick={() => this.props.clear(true)}>
+          CLEAR
+        </button>
       </div>
     );
   }

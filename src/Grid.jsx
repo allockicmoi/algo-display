@@ -3,6 +3,7 @@ import Square from "./Square.jsx";
 import "./Grid.css";
 import { BFS } from "./search_algos/BFS.js";
 import { DFS } from "./search_algos/DFS.js";
+import { Astar } from "./search_algos/Astar.js";
 import Selectionbar from "./SelectionBar.jsx";
 export default class CenterGrid extends Component {
   constructor() {
@@ -15,6 +16,7 @@ export default class CenterGrid extends Component {
     };
     this.toggleWall = this.toggleWall.bind(this);
     this.updateAlgo = this.updateAlgo.bind(this);
+    this.clear = this.clear.bind(this);
   }
   componentDidMount() {
     const { grid, start, end } = InitializeGrid();
@@ -46,6 +48,13 @@ export default class CenterGrid extends Component {
       this.setState({
         algoName: algo,
         algo: () => DFS(this.state.grid, this.state.start, this.state.end)
+      });
+    }
+    if (algo.value === "A*") {
+      console.log("in A*");
+      this.setState({
+        algoName: algo,
+        algo: () => Astar(this.state.grid, this.state.start, this.state.end)
       });
     }
   }
@@ -86,19 +95,20 @@ export default class CenterGrid extends Component {
     }
   }
 
-  refreshAndAnimate() {
-    if (this.state.isFresh === false) {
-      const { grid, start, end } = RefreshGrid(this.state.grid.slice());
-      // console.log(grid);
-      this.setState({ grid, start, end, isFresh: true });
-      for (let row in this.state.grid) {
-        for (let ind in this.state.grid[row]) {
-          //console.log(ind);
-          const square = this.state.grid[row][ind];
-          //console.log(square);
+  clear(resetWalls) {
+    const { grid, start, end } = RefreshGrid(
+      this.state.grid.slice(),
+      resetWalls
+    );
+    // console.log(grid);
+    this.setState({ grid, start, end, isFresh: true });
+    for (let row in this.state.grid) {
+      for (let ind in this.state.grid[row]) {
+        //console.log(ind);
+        const square = this.state.grid[row][ind];
+        //console.log(square);
+        if (resetWalls) {
           if (
-            document.getElementById(`square-${square.row}-${square.col}`)
-              .className != "square  wall" &&
             document.getElementById(`square-${square.row}-${square.col}`)
               .className != "square  start" &&
             document.getElementById(`square-${square.row}-${square.col}`)
@@ -107,9 +117,25 @@ export default class CenterGrid extends Component {
             document.getElementById(
               `square-${square.row}-${square.col}`
             ).className = "square  ";
-        }
+        } else if (
+          document.getElementById(`square-${square.row}-${square.col}`)
+            .className != "square  wall" &&
+          document.getElementById(`square-${square.row}-${square.col}`)
+            .className != "square  start" &&
+          document.getElementById(`square-${square.row}-${square.col}`)
+            .className != "square  end"
+        )
+          document.getElementById(
+            `square-${square.row}-${square.col}`
+          ).className = "square  ";
       }
-      console.log(grid);
+    }
+    console.log(grid);
+  }
+
+  refreshAndAnimate() {
+    if (this.state.isFresh === false) {
+      this.clear();
     }
     //console.log(this.state.grid[0]);
     this.animateSearchAlgo(this.state.algo());
@@ -122,6 +148,7 @@ export default class CenterGrid extends Component {
           algo={() => this.refreshAndAnimate()}
           algoName={this.state.algoName}
           updateAlgo={this.updateAlgo}
+          clear={this.clear}
         />
         {grid.map((row, rIndex) => {
           return (
@@ -181,7 +208,7 @@ const InitializeGrid = () => {
   console.log(grid);
   return { grid, start, end };
 };
-const RefreshGrid = gridOrig => {
+const RefreshGrid = (gridOrig, resetWalls) => {
   const grid = [];
   let start = null;
   let end = null;
@@ -196,8 +223,9 @@ const RefreshGrid = gridOrig => {
         isStart,
         isEnd,
         visited: false,
-        isWall: gridOrig[row][col].isWall
+        isWall: resetWalls ? false : gridOrig[row][col].isWall
       };
+      console.log(square.isWall);
 
       if (square.isStart) {
         start = square;
