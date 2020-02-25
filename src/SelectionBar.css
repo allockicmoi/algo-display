@@ -1,0 +1,33 @@
+.dd {
+  width: 20%;
+  height: 100%;
+  float: left;
+  padding-bottom: 1%;
+  padding-right: 2%;
+}
+
+.run_button {
+  float: left;
+  padding-left: 3%;
+  box-shadow: inset 0px 1px 0px 0px #bee2f9;
+  background: linear-gradient(to bottom, #d9dde0 5%, #47a4cf 100%);
+  background-color: #d9dde0;
+  border: 2px solid #3866a3;
+  /* display:inline-block; */
+  cursor: pointer;
+  color: #14396a;
+  font-family: Trebuchet MS;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 9px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #7cacde;
+}
+.run_button:hover {
+  background: linear-gradient(to bottom, #47a4cf 5%, #d9dde0 100%);
+  background-color: #47a4cf;
+}
+.run_button:active {
+  position: relative;
+  top: 1px;
+}
