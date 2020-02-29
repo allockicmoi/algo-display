@@ -13,11 +13,17 @@ export default class CenterGrid extends Component {
       algo: () => BFS(this.state.grid, this.state.start, this.state.end),
       algoName: "BFS",
       isFresh: true,
-      mouseDown:false
+      mouseDown:false,
+      startSelected:false,
+      endSelected:false
     };
     this.toggleWall = this.toggleWall.bind(this);
     this.updateAlgo = this.updateAlgo.bind(this);
     this.clear = this.clear.bind(this);
+    this.selectStart = this.selectStart.bind(this);
+    this.moveStart =this.moveStart.bind(this);
+    this.selectEnd = this.selectEnd.bind(this);
+    this.moveEnd = this.moveEnd.bind(this);
   }
   componentDidMount() {
     const { grid, start, end } = InitializeGrid();
@@ -99,7 +105,8 @@ export default class CenterGrid extends Component {
   clear(resetWalls) {
     const { grid, start, end } = RefreshGrid(
       this.state.grid.slice(),
-      resetWalls
+      resetWalls,
+      this.state.start,this.state.end
     );
     // console.log(grid);
     this.setState({ grid, start, end, isFresh: true });
@@ -133,12 +140,31 @@ export default class CenterGrid extends Component {
     }
     console.log(grid);
   }
+  moveStart(row,col){
+    const newStart = {row,col};
+    const {grid,start,end} = RefreshGrid(this.state.grid.slice(),false,newStart,this.state.end);
+    this.setState({grid,start,end},console.log(this.state.start));
+  }
+  selectStart(){
+    this.setState({startSelected:true},()=>console.log("start selected"));
+  }
+  moveEnd(row,col){
+    const newEnd = {row,col};
+    const {grid,start,end} = RefreshGrid(this.state.grid.slice(),false,this.state.start,newEnd);
+    this.setState({grid,start,end},console.log(this.state.end));
+  }
+  selectEnd(){
+    this.setState({endSelected:true},()=>console.log("end selected"));
+  }
   mouseDown(){
     this.setState({mouseDown:true}, ()=>console.log(this.state.mouseDown));
    
   }
   mouseUp(){
     this.setState({mouseDown:false},()=>console.log(this.state.mouseDown));
+    this.setState({startSelected:false},()=>console.log(this.state.startSelected));
+    this.setState({endSelected:false},()=>console.log(this.state.endSelected));
+
   }
   refreshAndAnimate() {
     if (this.state.isFresh === false) {
@@ -173,6 +199,12 @@ export default class CenterGrid extends Component {
                     isWall={false}
                     toggleWall={this.toggleWall}
                     mouseDown={this.state.mouseDown}
+                    selectStart={this.selectStart}
+                    startSelected={this.state.startSelected}
+                    moveStart={this.moveStart}
+                    selectEnd={this.selectEnd}
+                    endSelected ={this.state.endSelected}
+                    moveEnd={this.moveEnd}
                   />
                 );
               })}
@@ -216,15 +248,14 @@ const InitializeGrid = () => {
   console.log(grid);
   return { grid, start, end };
 };
-const RefreshGrid = (gridOrig, resetWalls) => {
+const RefreshGrid = (gridOrig, resetWalls,start,end) => {
   const grid = [];
-  let start = null;
-  let end = null;
+  
   for (let row = 0; row < 20; row++) {
     const tempRow = [];
     for (let col = 0; col < 40; col++) {
-      const isStart = row === 5 && col === 5;
-      const isEnd = row === 18 && col === 33;
+      const isStart = row === start.row && col === start.col;
+      const isEnd = row === end.row && col === end.col;
       const square = {
         row,
         col,
