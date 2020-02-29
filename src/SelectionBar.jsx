@@ -11,22 +11,36 @@ export default class SelectionBar extends Component {
 
   render() {
     const algos = ["BFS", "DFS", "A*"];
+    const mazeAlgos = ["test", "somealgo"];
     return (
-      <div className="selectionBar">
-        <Dropdown
-          className="dd"
-          id="algoSelect"
-          options={algos}
-          onChange={this.props.updateAlgo}
-          value={this.props.algoName}
-        ></Dropdown>
+      <div className="bar">
+        <div className="searchBar">
+          <Dropdown
+            className="dd"
+            id="algoSelect"
+            options={algos}
+            onChange={this.props.updateAlgo}
+            value={this.props.algoName}
+          ></Dropdown>
 
-        <button className="run_button" onClick={() => this.props.algo()}>
-          RUN
-        </button>
-        <button className="clear_button" onClick={() => this.props.clear(true)}>
-          CLEAR
-        </button>
+          <button className="run_button" onClick={() => this.props.algo()}>
+            SEARCH
+          </button>
+          <button
+            className="clear_button"
+            onClick={() => this.props.clear(true)}
+          >
+            CLEAR
+          </button>
+        </div>
+        <div className="mazeBar">
+          <Dropdown
+            className="dd"
+            id="mazeSelect"
+            options={mazeAlgos}
+          ></Dropdown>
+          <button className="maze_button">GENERATE MAZE</button>
+        </div>
       </div>
     );
   }
