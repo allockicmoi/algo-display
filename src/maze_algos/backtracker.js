@@ -31,7 +31,7 @@ export function BackTrack(grid, start, end) {
   const walls = [];
   for (const row in grid) {
     for (const ind in grid[row]) {
-      if (!path.includes(grid[row][ind])) {
+      if (!path.includes(grid[row][ind]) && grid[row][ind] !== end) {
         walls.push(grid[row][ind]);
       }
     }

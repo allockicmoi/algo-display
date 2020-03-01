@@ -7,6 +7,7 @@ import { Astar } from "./search_algos/Astar.js";
 import SearchSelectionbar from "./SelectionBar.jsx";
 import { BackTrack } from "./maze_algos/backtracker.js";
 import { Kruskal } from "./maze_algos/kruskal.js";
+import { Prims } from "./maze_algos/prims.js";
 export default class CenterGrid extends Component {
   constructor() {
     super();
@@ -100,6 +101,13 @@ export default class CenterGrid extends Component {
         mazeAlgoName: algo,
         mazeAlgo: () =>
           Kruskal(this.state.grid, this.state.start, this.state.end)
+      });
+    }
+    if (algo.value === "Prim's Algorithm") {
+      console.log("in Prims");
+      this.setState({
+        mazeAlgoName: algo,
+        mazeAlgo: () => Prims(this.state.grid, this.state.start, this.state.end)
       });
     }
   }

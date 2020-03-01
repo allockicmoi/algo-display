@@ -1,4 +1,4 @@
-export function Kruskal(_grid, start, end) {
+export function Prims(_grid, start, end) {
   const grid = _grid.slice();
   let walls = [];
   // console.log(walls.length);

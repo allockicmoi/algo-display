@@ -11,7 +11,11 @@ export default class SelectionBar extends Component {
 
   render() {
     const algos = ["BFS", "DFS", "A*"];
-    const mazeAlgos = ["Recursive BackTracking", "Kruskal's Algorithm"];
+    const mazeAlgos = [
+      "Recursive BackTracking",
+      "Kruskal's Algorithm",
+      "Prim's Algorithm"
+    ];
     return (
       <div className="bar">
         <div className="searchBar">
