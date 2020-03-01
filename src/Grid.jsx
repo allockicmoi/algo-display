@@ -8,6 +8,7 @@ import SearchSelectionbar from "./SelectionBar.jsx";
 import { BackTrack } from "./maze_algos/backtracker.js";
 import { Kruskal } from "./maze_algos/kruskal.js";
 import { Prims } from "./maze_algos/prims.js";
+import { Wilson } from "./maze_algos/wilson.js";
 export default class CenterGrid extends Component {
   constructor() {
     super();
@@ -108,6 +109,14 @@ export default class CenterGrid extends Component {
       this.setState({
         mazeAlgoName: algo,
         mazeAlgo: () => Prims(this.state.grid, this.state.start, this.state.end)
+      });
+    }
+    if (algo.value === "Wilson's Random Walk") {
+      console.log("in Prims");
+      this.setState({
+        mazeAlgoName: algo,
+        mazeAlgo: () =>
+          Wilson(this.state.grid, this.state.start, this.state.end)
       });
     }
   }
