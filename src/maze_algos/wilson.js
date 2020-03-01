@@ -11,7 +11,7 @@ export function Wilson(grid, start, end) {
   const path = [];
   let current = start;
   stack.push(start);
-  while (stack.length != 0) {
+  while (stack.length !== 0) {
     //console.log("loop");
     current.visited = true;
     const neighbs = GetUnvisitedNeighbours(current, grid);

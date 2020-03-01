@@ -14,8 +14,8 @@ export default class SelectionBar extends Component {
     const mazeAlgos = [
       "Recursive BackTracking",
       "Kruskal's Algorithm",
-      "Prim's Algorithm",
-      "Wilson's Random Walk"
+      "Wilson's Random Walk",
+      "Prim's Algorithm"
     ];
     return (
       <div className="bar">

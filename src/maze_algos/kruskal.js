@@ -3,7 +3,7 @@ export function Kruskal(_grid, start, end) {
   let walls = [];
   // console.log(walls.length);
   let sets = [];
-  const cells = [];
+
   let max_iter = 0;
   InitializeGrid(grid, start, end, sets, walls);
 
@@ -74,15 +74,7 @@ function InitializeGrid(grid, start, end, sets, walls) {
     }
   }
 }
-function Intersection(setA, setB) {
-  let _intersection = new Set();
-  for (let elem of setB) {
-    if (setA.has(elem)) {
-      _intersection.add(elem);
-    }
-  }
-  return _intersection;
-}
+
 function findContainingSet(sets, elem) {
   //   console.log(elem);
   //   console.log(sets);

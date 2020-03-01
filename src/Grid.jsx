@@ -112,7 +112,7 @@ export default class CenterGrid extends Component {
       });
     }
     if (algo.value === "Wilson's Random Walk") {
-      console.log("in Prims");
+      console.log("in Wilson");
       this.setState({
         mazeAlgoName: algo,
         mazeAlgo: () =>
@@ -351,7 +351,7 @@ const RefreshGrid = (gridOrig, resetWalls, start, end) => {
         visited: false,
         isWall: resetWalls ? false : gridOrig[row][col].isWall
       };
-      console.log(square.isWall);
+      //console.log(square.isWall);
 
       if (square.isStart) {
         start = square;

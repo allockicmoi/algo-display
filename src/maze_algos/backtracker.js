@@ -11,7 +11,7 @@ export function BackTrack(grid, start, end) {
   const path = [];
   let current = start;
   stack.push(start);
-  while (stack.length != 0) {
+  while (stack.length !== 0) {
     //console.log("loop");
     current.visited = true;
     const neighbs = GetUnvisitedNeighbours(current, grid);
@@ -20,10 +20,10 @@ export function BackTrack(grid, start, end) {
       path.push(nextNode);
       stack.push(nextNode);
       current = nextNode;
-      console.log("pushing");
+      // console.log("pushing");
     } else {
       current = stack.pop();
-      console.log("poping");
+      //console.log("poping");
     }
   }
   //console.log(path);
@@ -90,10 +90,4 @@ function GetUnvisitedNeighbours(node, grid) {
   }
 
   return neighbs;
-}
-function compareNodes(node1, node2) {
-  if (node1.seen && !node2.seen) return -1;
-  if (!node1.seen && node2.seen) return 1;
-
-  return 0;
 }

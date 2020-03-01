@@ -10,15 +10,49 @@
 .start {
   background-color: chartreuse;
 }
+@keyframes shortest_anim {
+  from {
+    background-color: blue;
+  }
+  to {
+    background-color: chartreuse;
+  }
+}
 .end {
   background-color: red;
 }
 .visited {
   background-color: blue;
+  animation-name: vstd_anim;
+  animation-duration: 1s;
+}
+@keyframes vstd_anim {
+  0% {
+    background-color: white;
+  }
+  1% {
+    background-color: gold;
+  }
+
+  100% {
+    background-color: blue;
+  }
 }
 .wall {
   background-color: purple;
+  animation-name: wall_anim;
+  animation-duration: 0.5s;
+}
+@keyframes wall_anim {
+  from {
+    background-color: white;
+  }
+  to {
+    background-color: purple;
+  }
 }
 .shortest {
   background-color: chartreuse;
+  animation-name: shortest_anim;
+  animation-duration: 1s;
 }
