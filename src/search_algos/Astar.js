@@ -89,7 +89,7 @@ function GetUnvisitedNeighbours(node, grid) {
     //console.log(grid[row - 1][col].visited === false);
   }
 
-  if (row !== 19) {
+  if (row !== 20) {
     if (
       grid[row + 1][col].visited === false &&
       grid[row + 1][col].isWall === false
@@ -106,7 +106,7 @@ function GetUnvisitedNeighbours(node, grid) {
       neighbours.push(grid[row][col - 1]);
     }
   }
-  if (col !== 39) {
+  if (col !== 40) {
     if (
       grid[row][col + 1].visited === false &&
       grid[row][col + 1].isWall === false

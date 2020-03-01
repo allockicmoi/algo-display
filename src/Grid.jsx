@@ -6,6 +6,7 @@ import { DFS } from "./search_algos/DFS.js";
 import { Astar } from "./search_algos/Astar.js";
 import SearchSelectionbar from "./SelectionBar.jsx";
 import { BackTrack } from "./maze_algos/backtracker.js";
+import { Kruskal } from "./maze_algos/kruskal.js";
 export default class CenterGrid extends Component {
   constructor() {
     super();
@@ -14,7 +15,7 @@ export default class CenterGrid extends Component {
       algo: () => BFS(this.state.grid, this.state.start, this.state.end),
       mazeAlgo: () =>
         BackTrack(this.state.grid, this.state.start, this.state.end),
-      mazeAlgoName: "RecursiveBacktracking",
+      mazeAlgoName: "Recursive BackTracking",
       algoName: "BFS",
       isFresh: true,
       mouseDown: false,
@@ -25,6 +26,7 @@ export default class CenterGrid extends Component {
     this.refreshAndAnimate = this.refreshAndAnimate.bind(this);
     this.refreshAndAnimateMaze = this.refreshAndAnimateMaze.bind(this);
     this.updateAlgo = this.updateAlgo.bind(this);
+    this.updateMazeAlgo = this.updateMazeAlgo.bind(this);
     this.clear = this.clear.bind(this);
     this.selectStart = this.selectStart.bind(this);
     this.moveStart = this.moveStart.bind(this);
@@ -77,6 +79,27 @@ export default class CenterGrid extends Component {
       this.setState({
         algoName: algo,
         algo: () => Astar(this.state.grid, this.state.start, this.state.end)
+      });
+    }
+  }
+  updateMazeAlgo(algo) {
+    // // console.log("TESTTTTTt");
+    // console.log(algo);
+    // console.log(algo === "BFS");
+    if (algo.value === "Recursive BackTracking") {
+      console.log("in Recursive BackTracking");
+      this.setState({
+        mazeAlgoName: algo,
+        mazeAlgo: () =>
+          BackTrack(this.state.grid, this.state.start, this.state.end)
+      });
+    }
+    if (algo.value === "Kruskal's Algorithm") {
+      console.log("in Kruskal");
+      this.setState({
+        mazeAlgoName: algo,
+        mazeAlgo: () =>
+          Kruskal(this.state.grid, this.state.start, this.state.end)
       });
     }
   }
@@ -154,7 +177,7 @@ export default class CenterGrid extends Component {
           ).className = "square  ";
       }
     }
-    console.log(grid);
+    //console.log(grid);
   }
   moveStart(row, col) {
     const newStart = { row, col };
@@ -224,9 +247,10 @@ export default class CenterGrid extends Component {
         <SearchSelectionbar
           algo={this.refreshAndAnimate}
           mazeAlgo={this.refreshAndAnimateMaze}
-          mazeAlgoName={this.mazeAlgoName}
+          mazeAlgoName={this.state.mazeAlgoName}
           algoName={this.state.algoName}
           updateAlgo={this.updateAlgo}
+          updateMazeAlgo={this.updateMazeAlgo}
           clear={this.clear}
         />
         {grid.map((row, rIndex) => {
@@ -266,9 +290,9 @@ const InitializeGrid = () => {
   const grid = [];
   let start = null;
   let end = null;
-  for (let row = 0; row < 20; row++) {
+  for (let row = 0; row < 21; row++) {
     const tempRow = [];
-    for (let col = 0; col < 40; col++) {
+    for (let col = 0; col < 41; col++) {
       const isStart = row === 5 && col === 5;
       const isEnd = row === 18 && col === 33;
       const square = {
@@ -297,9 +321,9 @@ const InitializeGrid = () => {
 const RefreshGrid = (gridOrig, resetWalls, start, end) => {
   const grid = [];
 
-  for (let row = 0; row < 20; row++) {
+  for (let row = 0; row < 21; row++) {
     const tempRow = [];
-    for (let col = 0; col < 40; col++) {
+    for (let col = 0; col < 41; col++) {
       const isStart = row === start.row && col === start.col;
       const isEnd = row === end.row && col === end.col;
       const square = {

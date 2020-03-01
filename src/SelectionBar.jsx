@@ -11,7 +11,7 @@ export default class SelectionBar extends Component {
 
   render() {
     const algos = ["BFS", "DFS", "A*"];
-    const mazeAlgos = ["test", "somealgo"];
+    const mazeAlgos = ["Recursive BackTracking", "Kruskal's Algorithm"];
     return (
       <div className="bar">
         <div className="searchBar">
@@ -38,7 +38,8 @@ export default class SelectionBar extends Component {
             className="dd"
             id="mazeSelect"
             options={mazeAlgos}
-            value="Recursive Backtracker"
+            onChange={this.props.updateMazeAlgo}
+            value={this.props.mazeAlgoName}
           ></Dropdown>
           <button className="maze_button" onClick={this.props.mazeAlgo}>
             GENERATE MAZE

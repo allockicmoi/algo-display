@@ -48,20 +48,7 @@ function GetPossibleNode(grid, neighbs) {
   }
   return nodeList[Math.floor(Math.random() * nodeList.length)];
 }
-function BacktrackShortest(path, end, start) {
-  let current = end;
-  let i = 0;
-  while (current !== start && i < 500) {
-    //console.log(current);
 
-    path.push(current);
-    current = current.parent;
-    i++;
-  }
-  path.push(start);
-  path = path.reverse();
-  return path;
-}
 function GetUnvisitedNeighbours(node, grid) {
   //console.log(node);
   const neighbs = [];
@@ -84,7 +71,7 @@ function GetUnvisitedNeighbours(node, grid) {
       neighbs.push(grid[row][col - 1]);
     }
   }
-  if (row !== 19) {
+  if (row !== 20) {
     if (
       grid[row + 1][col].visited === false &&
       grid[row + 1][col].isWall === false
@@ -93,7 +80,7 @@ function GetUnvisitedNeighbours(node, grid) {
       neighbs.push(grid[row + 1][col]);
     }
   }
-  if (col !== 39) {
+  if (col !== 40) {
     if (
       grid[row][col + 1].visited === false &&
       grid[row][col + 1].isWall === false
