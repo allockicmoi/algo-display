@@ -20,6 +20,7 @@ export default class SelectionBar extends Component {
     return (
       <div className="bar">
         <div className="searchBar">
+          <h3 className="searchLabel">SEARCH ALGO:</h3>
           <Dropdown
             className="dd"
             id="algoSelect"
@@ -39,6 +40,7 @@ export default class SelectionBar extends Component {
           </button>
         </div>
         <div className="mazeBar">
+          <h3 className="mazeLabel">MAZE ALGO:</h3>
           <Dropdown
             className="dd"
             id="mazeSelect"

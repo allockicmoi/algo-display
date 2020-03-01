@@ -270,34 +270,36 @@ export default class CenterGrid extends Component {
           updateMazeAlgo={this.updateMazeAlgo}
           clear={this.clear}
         />
-        {grid.map((row, rIndex) => {
-          return (
-            <div className="row" key={rIndex}>
-              {row.map((square, cIndex) => {
-                // console.log(square.isStart);
+        <div className="gridBox">
+          {grid.map((row, rIndex) => {
+            return (
+              <div className="row" key={rIndex}>
+                {row.map((square, cIndex) => {
+                  // console.log(square.isStart);
 
-                return (
-                  <Square
-                    key={cIndex}
-                    row={rIndex}
-                    col={cIndex}
-                    isStart={square.isStart}
-                    isEnd={square.isEnd}
-                    isWall={this.state.grid[square.row][square.col].isWall}
-                    toggleWall={this.toggleWall}
-                    mouseDown={this.state.mouseDown}
-                    selectStart={this.selectStart}
-                    startSelected={this.state.startSelected}
-                    moveStart={this.moveStart}
-                    selectEnd={this.selectEnd}
-                    endSelected={this.state.endSelected}
-                    moveEnd={this.moveEnd}
-                  />
-                );
-              })}
-            </div>
-          );
-        })}
+                  return (
+                    <Square
+                      key={cIndex}
+                      row={rIndex}
+                      col={cIndex}
+                      isStart={square.isStart}
+                      isEnd={square.isEnd}
+                      isWall={this.state.grid[square.row][square.col].isWall}
+                      toggleWall={this.toggleWall}
+                      mouseDown={this.state.mouseDown}
+                      selectStart={this.selectStart}
+                      startSelected={this.state.startSelected}
+                      moveStart={this.moveStart}
+                      selectEnd={this.selectEnd}
+                      endSelected={this.state.endSelected}
+                      moveEnd={this.moveEnd}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }

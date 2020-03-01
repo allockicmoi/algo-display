@@ -9,11 +9,22 @@
   overflow: hidden;
 }
 .ad {
-  outline-color: darkblue;
+  outline-color: rgb(101, 134, 224);
   color: white;
   font-size: 70px;
 
-  border-color: darkblue;
-  -webkit-text-stroke: 3px rgb(43, 90, 243);
+  float: left;
+  border-color: rgb(55, 99, 192);
+  -webkit-text-stroke: 3px rgb(94, 159, 233);
   -webkit-text-fill-color: white;
+}
+.icon {
+  float: left;
+  padding-top: 1.1em;
+  padding-left: 30%;
+  width: 5%;
+  float: left;
+  font-size: 3.5em;
+  color: white;
+  padding-left: 30%;
 }
