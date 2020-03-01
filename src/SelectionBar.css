@@ -10,7 +10,7 @@
   float: left;
   padding-left: 3%;
   margin-right: 1%;
-  box-shadow: inset 0px 1px 0px 0px #bee2f9;
+  box-shadow: inset 0px 0px 0px 0px #bee2f9;
   background: linear-gradient(to bottom, #d9dde0 5%, #47a4cf 100%);
   background-color: #d9dde0;
   border: 2px solid #3866a3;
@@ -35,7 +35,7 @@
 .clear_button {
   float: left;
 
-  box-shadow: inset 0px 1px 0px 0px #bee2f9;
+  box-shadow: inset 0px 0px 0px 0px #bee2f9;
   background: linear-gradient(to bottom, #d9dde0 5%, #47cf69 100%);
   background-color: #d9dde0;
   border: 2px solid green;
@@ -59,7 +59,7 @@
 }
 
 .searchBar {
-  width: 30%;
+  width: 40%;
   height: 100%;
   float: left;
 }
@@ -67,16 +67,16 @@
   height: 5%;
 }
 .mazeBar {
-  width: 30%;
+  width: 40%;
   height: 100%;
   float: left;
 }
 .maze_button {
   float: left;
 
-  box-shadow: inset 0px 1px 0px 0px #bee2f9;
-  background: linear-gradient(to bottom, #d9dde0 5%, #cc3ae9 100%);
-  background-color: #d9dde0;
+  box-shadow: inset 0px 0px 0px 0px #edbef9;
+  background: linear-gradient(to bottom, #e0d9de 5%, #cc3ae9 100%);
+  background-color: #a86ebe;
   border: 2px solid rgb(102, 2, 105);
   /* display:inline-block; */
   cursor: pointer;
@@ -89,7 +89,7 @@
   text-shadow: 0px 1px 0px cc3ae9;
 }
 .maze_button:hover {
-  background: linear-gradient(to bottom, rgb(67, 241, 67) 5%, #cc3ae9 100%);
+  background: linear-gradient(to bottom, rgb(119, 62, 131) 5%, #cc68e0 100%);
   background-color: #cc3ae9;
 }
 .maze_button:active {

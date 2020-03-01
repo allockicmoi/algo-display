@@ -5,12 +5,16 @@ import { BFS } from "./search_algos/BFS.js";
 import { DFS } from "./search_algos/DFS.js";
 import { Astar } from "./search_algos/Astar.js";
 import SearchSelectionbar from "./SelectionBar.jsx";
+import { BackTrack } from "./maze_algos/backtracker.js";
 export default class CenterGrid extends Component {
   constructor() {
     super();
     this.state = {
       grid: [],
       algo: () => BFS(this.state.grid, this.state.start, this.state.end),
+      mazeAlgo: () =>
+        BackTrack(this.state.grid, this.state.start, this.state.end),
+      mazeAlgoName: "RecursiveBacktracking",
       algoName: "BFS",
       isFresh: true,
       mouseDown: false,
@@ -18,6 +22,8 @@ export default class CenterGrid extends Component {
       endSelected: false
     };
     this.toggleWall = this.toggleWall.bind(this);
+    this.refreshAndAnimate = this.refreshAndAnimate.bind(this);
+    this.refreshAndAnimateMaze = this.refreshAndAnimateMaze.bind(this);
     this.updateAlgo = this.updateAlgo.bind(this);
     this.clear = this.clear.bind(this);
     this.selectStart = this.selectStart.bind(this);
@@ -37,6 +43,15 @@ export default class CenterGrid extends Component {
     tempGrid[row][col].isWall =
       tempGrid[row][col].isWall === true ? false : true;
     this.setState({ grid: tempGrid, algo: this.state.algo });
+  }
+  createWalls(walls) {
+    const tempGrid = this.state.grid.slice();
+    for (const wall in walls) {
+      const row = walls[wall].row;
+      const col = walls[wall].col;
+      tempGrid[row][col].isWall = true;
+    }
+    this.setState({ grid: tempGrid });
   }
 
   updateAlgo(algo) {
@@ -79,9 +94,9 @@ export default class CenterGrid extends Component {
             const square = shortestPath[pathIndex];
             if (
               document.getElementById(`square-${square.row}-${square.col}`)
-                .className != "square  start" &&
+                .className !== "square  start" &&
               document.getElementById(`square-${square.row}-${square.col}`)
-                .className != "square  end"
+                .className !== "square  end"
             ) {
               document.getElementById(
                 `square-${square.row}-${square.col}`
@@ -119,20 +134,20 @@ export default class CenterGrid extends Component {
         if (resetWalls) {
           if (
             document.getElementById(`square-${square.row}-${square.col}`)
-              .className != "square  start" &&
+              .className !== "square  start" &&
             document.getElementById(`square-${square.row}-${square.col}`)
-              .className != "square  end"
+              .className !== "square  end"
           )
             document.getElementById(
               `square-${square.row}-${square.col}`
             ).className = "square  ";
         } else if (
           document.getElementById(`square-${square.row}-${square.col}`)
-            .className != "square  wall" &&
+            .className !== "square  wall" &&
           document.getElementById(`square-${square.row}-${square.col}`)
-            .className != "square  start" &&
+            .className !== "square  start" &&
           document.getElementById(`square-${square.row}-${square.col}`)
-            .className != "square  end"
+            .className !== "square  end"
         )
           document.getElementById(
             `square-${square.row}-${square.col}`
@@ -183,10 +198,20 @@ export default class CenterGrid extends Component {
   }
   refreshAndAnimate() {
     if (this.state.isFresh === false) {
-      this.clear();
+      this.clear(false);
     }
     //console.log(this.state.grid[0]);
     this.animateSearchAlgo(this.state.algo());
+  }
+  refreshAndAnimateMaze() {
+    this.clear(true);
+    setTimeout(() => this.animateMazeAlgo(this.state.mazeAlgo()), 50);
+
+    this.setState({ isFresh: false });
+  }
+  animateMazeAlgo(walls) {
+    this.createWalls(walls);
+    this.forceUpdate();
   }
   render() {
     const { grid } = this.state;
@@ -197,7 +222,9 @@ export default class CenterGrid extends Component {
         onMouseUp={() => this.mouseUp()}
       >
         <SearchSelectionbar
-          algo={() => this.refreshAndAnimate()}
+          algo={this.refreshAndAnimate}
+          mazeAlgo={this.refreshAndAnimateMaze}
+          mazeAlgoName={this.mazeAlgoName}
           algoName={this.state.algoName}
           updateAlgo={this.updateAlgo}
           clear={this.clear}
@@ -215,7 +242,7 @@ export default class CenterGrid extends Component {
                     col={cIndex}
                     isStart={square.isStart}
                     isEnd={square.isEnd}
-                    isWall={false}
+                    isWall={this.state.grid[square.row][square.col].isWall}
                     toggleWall={this.toggleWall}
                     mouseDown={this.state.mouseDown}
                     selectStart={this.selectStart}
@@ -264,7 +291,7 @@ const InitializeGrid = () => {
     }
     grid.push(tempRow);
   }
-  console.log(grid);
+  //console.log(grid);
   return { grid, start, end };
 };
 const RefreshGrid = (gridOrig, resetWalls, start, end) => {
@@ -296,6 +323,6 @@ const RefreshGrid = (gridOrig, resetWalls, start, end) => {
     }
     grid.push(tempRow);
   }
-  console.log(grid);
+  //console.log(grid);
   return { grid, start, end };
 };

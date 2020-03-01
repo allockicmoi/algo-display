@@ -23,7 +23,7 @@ export default class SelectionBar extends Component {
             value={this.props.algoName}
           ></Dropdown>
 
-          <button className="run_button" onClick={() => this.props.algo()}>
+          <button className="run_button" onClick={this.props.algo}>
             SEARCH
           </button>
           <button
@@ -38,8 +38,11 @@ export default class SelectionBar extends Component {
             className="dd"
             id="mazeSelect"
             options={mazeAlgos}
+            value="Recursive Backtracker"
           ></Dropdown>
-          <button className="maze_button">GENERATE MAZE</button>
+          <button className="maze_button" onClick={this.props.mazeAlgo}>
+            GENERATE MAZE
+          </button>
         </div>
       </div>
     );

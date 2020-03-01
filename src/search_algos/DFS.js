@@ -1,7 +1,11 @@
 export function DFS(grid, start, end) {
   //   console.log(start);
   //   console.log(end);
-  //   console.log(grid);
+  for (const row in grid) {
+    for (const ind in grid[row]) {
+      grid[row][ind].visited = false;
+    }
+  }
   const toVisit = [];
   const vstd = [];
   const shortestPath = [];
@@ -16,8 +20,11 @@ export function DFS(grid, start, end) {
       // console.log(neighbs[child]);
       if (neighbs[child] === end) {
         found = true;
-      } else if (!toVisit.includes(neighbs[child])) {
-        neighbs[child].parent = currentNode;
+      } else if (!neighbs[child].visited) {
+        if (!toVisit.includes(neighbs[child])) {
+          neighbs[child].parent = currentNode;
+        }
+
         toVisit.push(neighbs[child]);
       }
     }
@@ -81,6 +88,15 @@ function GetUnvisitedNeighbours(node, grid) {
       neighbs.push(grid[row][col - 1]);
     }
   }
+  if (col !== 39) {
+    if (
+      grid[row][col + 1].visited === false &&
+      grid[row][col + 1].isWall === false
+    ) {
+      neighbs.push(grid[row][col + 1]);
+    }
+  }
+
   if (row !== 19) {
     if (
       grid[row + 1][col].visited === false &&
@@ -88,14 +104,6 @@ function GetUnvisitedNeighbours(node, grid) {
     ) {
       //console.log("adding neighbours");
       neighbs.push(grid[row + 1][col]);
-    }
-  }
-  if (col !== 39) {
-    if (
-      grid[row][col + 1].visited === false &&
-      grid[row][col + 1].isWall === false
-    ) {
-      neighbs.push(grid[row][col + 1]);
     }
   }
 
