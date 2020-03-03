@@ -1,9 +1,10 @@
 .dd {
-  width: 30%;
-  height: 100%;
+  width: 35%;
+
   float: left;
-  padding-bottom: 1%;
+  padding-top: 0.4vh;
   padding-right: 2%;
+  font-size: 2vh;
 }
 
 .run_button {
@@ -13,7 +14,7 @@
   box-shadow: inset 0px 0px 0px 0px #bee2f9;
   background: linear-gradient(to bottom, #d9dde0 5%, #47a4cf 100%);
   background-color: #d9dde0;
-  border: 2px solid #3866a3;
+  border: 0.25vh solid #3866a3;
   /* display:inline-block; */
   cursor: pointer;
   color: #14396a;
@@ -24,6 +25,7 @@
   text-decoration: none;
   text-shadow: 0px 1px 0px #7cacde;
   width: 18%;
+  font-size: 2.5vh;
 }
 .run_button:hover {
   background: linear-gradient(to bottom, #47a4cf 5%, #d9dde0 100%);
@@ -39,7 +41,7 @@
   box-shadow: inset 0px 0px 0px 0px #bee2f9;
   background: linear-gradient(to bottom, #d9dde0 5%, #47cf69 100%);
   background-color: #d9dde0;
-  border: 2px solid green;
+  border: 0.25vh solid green;
   /* display:inline-block; */
   cursor: pointer;
   color: darkgreen;
@@ -50,6 +52,7 @@
   text-decoration: none;
   text-shadow: 0px 1px 0px lightgreen;
   width: 15%;
+  font-size: 2.5vh;
 }
 .clear_button:hover {
   background: linear-gradient(to bottom, rgb(67, 241, 67) 5%, #d9e4bdf1 100%);
@@ -80,7 +83,7 @@
   box-shadow: inset 0px 0px 0px 0px #edbef9;
   background: linear-gradient(to bottom, #e0d9de 5%, #cc3ae9 100%);
   background-color: #a86ebe;
-  border: 2px solid rgb(102, 2, 105);
+  border: 0.25vh solid rgb(102, 2, 105);
   /* display:inline-block; */
   cursor: pointer;
   color: rgb(88, 10, 88);
@@ -90,7 +93,8 @@
   padding: 9px 1%;
   text-decoration: none;
   text-shadow: 0px 1px 0px cc3ae9;
-  width: 25%;
+  width: fit-content;
+  font-size: 2.5vh;
 }
 .maze_button:hover {
   background: linear-gradient(to bottom, rgb(119, 62, 131) 5%, #cc68e0 100%);
@@ -105,10 +109,12 @@
   margin-top: 1%;
   padding-right: 1%;
   color: #09639b;
+  font-size: 2.2vh;
 }
 .mazeLabel {
   float: left;
   margin-top: 1%;
   color: #09639b;
   padding-right: 1%;
+  font-size: 2.2vh;
 }
